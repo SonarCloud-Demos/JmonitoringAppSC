@@ -23,6 +23,11 @@ import java.util.Properties;
 
 public class ThingFactory {
 
+    // Private constructor to hide the implicit public one
+    private ThingFactory() {
+        // Prevent instantiation
+    }
+
     public static ThingInterface createThing() {
 
         Properties props = new Properties();
@@ -31,6 +36,7 @@ public class ThingFactory {
         try (InputStream thingproperties =
                 ThingFactory.class.getClassLoader().getResourceAsStream("thing.properties")) {
             if (thingproperties == null) {
+                // todo fix prints
                 System.out.println("Can't find thing.properties");
                 return new Thing2();
             }

@@ -31,9 +31,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
-public class DataBaseServer {
+    @GetMapping(value = "/resetdb")
 
     @RequestMapping(value = "/resetdb", method = RequestMethod.GET)
     public ResponseEntity<List<XMLMessage>> getOtherOrder(
@@ -42,7 +44,7 @@ public class DataBaseServer {
         ArrayList<XMLMessage> resp = new ArrayList<XMLMessage>();
         resp.add(new XMLMessage("Not Implemented."));
         return new ResponseEntity<List<XMLMessage>>(resp, HttpStatus.OK);
-    }
+    @PostMapping(value = "/testdb")
 
     @RequestMapping(value = "/testdb", method = RequestMethod.POST)
     public ResponseEntity<List<XMLMessage>> createOrder2(
@@ -51,7 +53,7 @@ public class DataBaseServer {
         List<XMLMessage> resp = new ArrayList<XMLMessage>();
         resp.add(new XMLMessage("Not Implemented."));
         return new ResponseEntity<List<XMLMessage>>(resp, HttpStatus.OK);
-    }
+    @GetMapping(value = "/getall")
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET)
     public ResponseEntity<List<XMLMessage>> getAll(
