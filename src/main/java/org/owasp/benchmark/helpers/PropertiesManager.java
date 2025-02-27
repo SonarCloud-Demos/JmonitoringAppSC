@@ -27,6 +27,12 @@ import java.util.Properties;
 public class PropertiesManager {
     private File file = null;
 
+    protected void Example() throws IOException {
+        File tempDir;
+        tempDir = File.createTempFile("", ".");
+        tempDir.delete();
+        tempDir.mkdir();  // Noncompliant
+    }
     // This loads the default benchmark.properties file
     public PropertiesManager() {
         file = Utils.getFileFromClasspath("benchmark.properties", this.getClass().getClassLoader());

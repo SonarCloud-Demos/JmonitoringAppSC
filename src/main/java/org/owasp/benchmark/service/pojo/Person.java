@@ -31,7 +31,7 @@ public class Person {
 
     public Person() {}
 
-    public Person(long id, String firstName, String lastName, String address) {
+    public Person(long id, String firstName, String address) {
         this.id = id;
         this.firstName = firstName;
         this.address = address;
