@@ -5,8 +5,8 @@
     <version>1.2</version>
     <packaging>war</packaging>
 
-    <name>JMonitoringApp</name>
-    <description>JMonitoring is an app to detect and get inputs from the web</description>
+    <name>JMonitoringAppSC</name>
+    <description>JMonitoringSC is an app to detect and get inputs from the web</description>
     <url>www.sonarqube.com</url>
 
     <developers>
@@ -1192,14 +1192,19 @@
                     </reportSet>
                 </reportSets>
             </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>5.5.0.6356</version>
+            </plugin>
+
         </plugins>
     </reporting>
 
     <properties>
 
         <sonar.sources>pom.xml,src,deploy</sonar.sources>
-   
-        <sonar.organization>yacine-maghezzi-sonarsource</sonar.organization>
+        <sonar.organization>SonarCloud-Demos</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         
         <failOnMissingWebXml>false</failOnMissingWebXml>
