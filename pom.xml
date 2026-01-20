@@ -20,7 +20,7 @@
         <version.springframework>4.3.30.RELEASE</version.springframework>
         <version.hibernate>5.6.14.Final</version.hibernate>
         <version.apacheds>2.0.0.AM26</version.apacheds>
-        <version.apache-ldap-api>2.0.0</version.apache-ldap-api>
+        <version.apache-shared-ldap>1.0.0-M13</version.apache-shared-ldap>
 
         <tomcat.major.version>8</tomcat.major.version>
         <tomcat.url>https://repo1.maven.org/maven2/org/apache/tomcat/tomcat/8.5.85/tomcat-8.5.85.zip</tomcat.url>
@@ -93,11 +93,17 @@
             </exclusions>
         </dependency>
 
-<dependency>
-    <groupId>org.apache.directory.api</groupId>
-    <artifactId>api-ldap-model</artifactId>
-    <version>${version.apache-ldap-api}</version>
-</dependency>
+        <dependency>
+            <groupId>org.apache.directory.shared</groupId>
+            <artifactId>shared-ldap</artifactId>
+            <version>${version.apache-shared-ldap}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
