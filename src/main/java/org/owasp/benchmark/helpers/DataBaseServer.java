@@ -48,9 +48,9 @@ public class DataBaseServer {
     public ResponseEntity<List<XMLMessage>> createOrder2(
             @RequestBody Person model, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<XMLMessage> resp = new ArrayList<XMLMessage>();
+        List<XMLMessage> resp = new ArrayList<>();
         resp.add(new XMLMessage("Not Implemented."));
-        return new ResponseEntity<List<XMLMessage>>(resp, HttpStatus.OK);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET)
