@@ -19,7 +19,9 @@
 package org.owasp.benchmark.helpers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -90,7 +92,14 @@ public class LDAPManager {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String location = req.getParameter("url");
-        resp.sendRedirect(location);
+
+        List<String> allowedHosts = new ArrayList<String>();
+        allowedHosts.add("https://trusted1.example.com/");
+        allowedHosts.add("https://trusted2.example.com/");
+
+        if (allowedHosts.contains(location)) {
+            resp.sendRedirect(location);
+        }
       }
 
 
