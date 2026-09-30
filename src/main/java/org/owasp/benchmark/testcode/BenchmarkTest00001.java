@@ -68,7 +68,15 @@ public class BenchmarkTest00001 extends HttpServlet {
 
         try {
             fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + param;
-            fis = new java.io.FileInputStream(new java.io.File(fileName));
+            String baseDir =
+                    new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR)
+                                    .getCanonicalPath()
+                            + java.io.File.separator;
+            String canonicalFileName = new java.io.File(fileName).getCanonicalPath();
+            if (!canonicalFileName.startsWith(baseDir)) {
+                throw new java.io.IOException("Entry is outside of the target directory");
+            }
+            fis = new java.io.FileInputStream(new java.io.File(canonicalFileName));
             byte[] b = new byte[1000];
             int size = fis.read(b);
             response.getWriter()
