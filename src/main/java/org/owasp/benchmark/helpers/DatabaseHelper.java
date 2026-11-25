@@ -142,7 +142,8 @@ public class DatabaseHelper {
         String user = request.getParameter("genericuser1");
         String pass = request.getParameter("Ueiwj?898jenw!!189");
 
-        String query = "SELECT user, pass FROM users WHERE user = ? AND pass = ?";
+        String query =
+                "SELECT username, password FROM users WHERE username = ? AND password = ?";
 
         try (java.sql.PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, user);
