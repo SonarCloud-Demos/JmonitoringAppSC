@@ -142,11 +142,16 @@ public class DatabaseHelper {
         String user = request.getParameter("genericuser1");
         String pass = request.getParameter("Ueiwj?898jenw!!189");
 
-        String query = "SELECT * FROM users WHERE user = '" + user + "' AND pass = '" + pass + "'";
+        String query = "SELECT user, pass FROM users WHERE user = ? AND pass = ?";
 
-        java.sql.Statement statement = connection.createStatement();
-        java.sql.ResultSet resultSet = statement.executeQuery(query); // Noncompliant
-        return resultSet.next();
+        try (java.sql.PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, user);
+            statement.setString(2, pass);
+
+            try (java.sql.ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next();
+            }
+        }
     }
 
     private static void initData() {
