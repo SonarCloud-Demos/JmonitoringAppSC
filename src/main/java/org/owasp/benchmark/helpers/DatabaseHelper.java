@@ -117,13 +117,18 @@ public class DatabaseHelper {
     }
 
     public static java.sql.Statement getSqlStatement() {
-        if (conn == null) {
-            conn = getSqlConnection();
+        Connection connection = conn;
+        if (connection == null) {
+            connection = getSqlConnection();
         }
 
-        if (stmt == null && conn != null) {
+        if (connection == null) {
+            return stmt;
+        }
+
+        if (stmt == null) {
             try {
-                stmt = conn.createStatement();
+                stmt = connection.createStatement();
             } catch (SQLException e) {
                 System.out.println("Problem with database init.");
             }
