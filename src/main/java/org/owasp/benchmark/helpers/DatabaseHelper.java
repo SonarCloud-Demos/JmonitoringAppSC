@@ -117,13 +117,18 @@ public class DatabaseHelper {
     }
 
     public static java.sql.Statement getSqlStatement() {
-        if (conn == null) {
-            getSqlConnection();
+        Connection connection = conn;
+        if (connection == null) {
+            connection = getSqlConnection();
+        }
+
+        if (connection == null) {
+            return stmt;
         }
 
         if (stmt == null) {
             try {
-                stmt = conn.createStatement();
+                stmt = connection.createStatement();
             } catch (SQLException e) {
                 System.out.println("Problem with database init.");
             }
@@ -142,11 +147,17 @@ public class DatabaseHelper {
         String user = request.getParameter("genericuser1");
         String pass = request.getParameter("Ueiwj?898jenw!!189");
 
-        String query = "SELECT * FROM users WHERE user = '" + user + "' AND pass = '" + pass + "'";
+        String query =
+                "SELECT username, password FROM users WHERE username = ? AND password = ?";
 
-        java.sql.Statement statement = connection.createStatement();
-        java.sql.ResultSet resultSet = statement.executeQuery(query); // Noncompliant
-        return resultSet.next();
+        try (java.sql.PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, user);
+            statement.setString(2, pass);
+
+            try (java.sql.ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next();
+            }
+        }
     }
 
     private static void initData() {
