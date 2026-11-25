@@ -118,10 +118,10 @@ public class DatabaseHelper {
 
     public static java.sql.Statement getSqlStatement() {
         if (conn == null) {
-            getSqlConnection();
+            conn = getSqlConnection();
         }
 
-        if (stmt == null) {
+        if (stmt == null && conn != null) {
             try {
                 stmt = conn.createStatement();
             } catch (SQLException e) {
